@@ -10,13 +10,10 @@ import Cocoa
 
 class EditingViewController: NSViewController {
     @IBOutlet var editor: ModalTextView!
+    var openPanelProvider: OpenPanelProvider!
     
     func openDocument(sender: AnyObject) {
-        let openPanel = NSOpenPanel()
-        openPanel.allowsMultipleSelection = false
-        openPanel.canChooseDirectories = false
-        openPanel.canCreateDirectories = false
-        openPanel.canChooseFiles = true
+        let openPanel = openPanelProvider.openPanel()
         let i = openPanel.runModal()
         if(i == NSModalResponseOK){
             print(openPanel.URL)
